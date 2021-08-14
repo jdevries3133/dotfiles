@@ -1,0 +1,74 @@
+# taken from https://raw.githubusercontent.com/vdanen/mutt-scripts/master/mailcap/mailcap
+
+
+# $Id: sample.mailcap,v 3.0 2002/01/24 12:11:17 roessler Exp $
+
+# ~/.mutt/mailcap
+#
+# this uses the view_attachment script found in ~/.mutt/view_attachment.sh
+#
+# this is meant for an OS X system
+
+# MS Excel
+# this will use the default xls spreadsheet handler from open
+application/x-msexcel; /Users/johndevries/.mutt/view_attachment.sh %s
+application/ms-exc; /Users/johndevries/.mutt/view_attachment.sh %s
+application/excel; /Users/johndevries/.mutt/view_attachment.sh %s
+application/msexcel; /Users/johndevries/.mutt/view_attachment.sh %s
+application/vnd.ms-exc; /Users/johndevries/.mutt/view_attachment.sh %s
+application/vnd.ms-excel; /Users/johndevries/.mutt/view_attachment.sh %s
+
+# MS Word
+application/msword; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+
+#
+# for Star/OpenOffice stuff, use NeoOffice/J
+#
+# Star/Open Office Writer
+application/vnd.sun.xml.writer; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+application/vnd.sun.xml.writer.global; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+application/vnd.stardivision.writer; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+application/vnd.stardivision.writer-global; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+application/x-starwriter; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+application/vnd.sun.xml.writer.template; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+
+# Star/Open Office Calc
+application/vnd.sun.xml.calc; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+application/vnd.stardivision.calc; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+application/x-starcalc; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+application/vnd.sun.xml.calc.template; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+
+# Star/Open Office Draw
+application/vnd.sun.xml.draw; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+application/vnd.stardivision.draw; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+application/x-stardraw; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+application/vnd.sun.xml.draw.template; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+
+# Star/Open Office Math
+application/vnd.sun.xml.math; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+application/vnd.stardivision.math; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+application/x-starmath; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+
+application/vnd.sun.xml.writer; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+
+# Star/Open Office Impress
+application/x-starimpress; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+application/vnd.sun.xml.impress.template; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+application/vnd.sun.xml.impress; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+application/vnd.stardivision.impress; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+application/vnd.stardivision.impress-packed; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'
+
+# Images
+image/jpeg; /Users/johndevries/.mutt/view_attachment.sh %s
+image/pjpeg; /Users/johndevries/.mutt/view_attachment.sh %s
+image/png; /Users/johndevries/.mutt/view_attachment.sh %s
+image/gif; /Users/johndevries/.mutt/view_attachment.sh %s
+
+# PDF
+application/pdf; /Users/johndevries/.mutt/view_attachment.sh %s pdf
+
+# HTML
+text/html; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Firefox.app'
+
+# Unidentified.
+application/octet-stream; /Users/johndevries/.mutt/view_attachment.sh %s "-"
