@@ -1,0 +1,7 @@
+[submodule "vim"]
+	path = vim
+	url = git@github.com:jdevries3133/vim_config
+
+[submodule "nvim"]
+	path = nvim
+	url = git@github.com:jdevries3133/nvim_config
