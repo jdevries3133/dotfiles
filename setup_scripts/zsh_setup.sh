@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# symlink zshrc
+ln -s $(pwd)/zshrc $HOME/.zshrc
 
 # zsh
 command -v zsh --version
