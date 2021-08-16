@@ -1,4 +1,4 @@
-# taken from https://raw.githubusercontent.com/johndevries/mutt-scripts/master/mailcap/mailcap
+# taken from https://raw.githubusercontent.com/vdanen/mutt-scripts/master/mailcap/mailcap
 
 
 # $Id: sample.mailcap,v 3.0 2002/01/24 12:11:17 roessler Exp $
@@ -68,6 +68,8 @@ image/gif; /Users/johndevries/.mutt/view_attachment.sh %s
 # PDF
 application/pdf; /Users/johndevries/.mutt/view_attachment.sh %s pdf
 
+# HTML
+text/html; /Users/johndevries.mutt/view_attachment.sh %s
+
 # Unidentified.
 application/octet-stream; /Users/johndevries/.mutt/view_attachment.sh %s "-" 
-
