@@ -1,0 +1,15 @@
+# revise this configuration for each email account, and save it to
+# ~/.mutt/[[ email-user.domain.com ]]
+
+# note that the muttrc will look for *my* email accounts. Others must revise
+# ~/.muttrc as necessary.
+
+set imap_user = "[[ EMAIL ADDRESS ]]"
+set imap_pass = "[[ PASSWORD ]]"
+set smtp_url = "smtps://[[ EMAIL ADDRESS ]]@smtp.gmail.com:465/"
+set smtp_pass = "[[ PASSWORD]]"
+set from = "[[ EMAIL_ADDRESS ]]"
+set realname = "Jack DeVries"
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = "+INBOX"
+set smtp_authenticators = 'gssapi:login'

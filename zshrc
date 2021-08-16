@@ -46,6 +46,11 @@ export PATH="/opt/homebrew/opt/autoconf@2.69/bin:$PATH"
 export LDFLAGS="$LDFLAGS -L/opt/homebrew/Cellar/gmp/6.2.1/lib"
 
 
+# -------------------------- MACOS STUPIDITY ------------------------
+
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY="YES"
+
+
 fi  # OSTYPE contains "darwin"
 #####################################################################
 
