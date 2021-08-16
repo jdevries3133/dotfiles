@@ -11,8 +11,14 @@ alias vnv="python3 -m venv $VENV_NAME \
 alias vnvr="vnv && pip install -r requirements.txt"
 alias act="source $VENV_NAME/bin/activate"
 
+# screen
+alias ss="screen -d -r" # screen session
+alias sn="screen -S"    # screen new (session)
+alias sl="screen -ls"
+
+# misc
 alias nt="nvim -c \"terminal\""
-alias temp="cd "$(mktemp -d)""
+alias temp="cd $(mktemp -d)"
 alias ggg="nvim ~/.oh-my-zsh/plugins/git/README.md"
 
 
@@ -51,9 +57,9 @@ export LDFLAGS="$LDFLAGS -L/opt/homebrew/Cellar/gmp/6.2.1/lib"
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY="YES"
 
 
-fi  # OSTYPE contains "darwin"
 #####################################################################
-
+fi  # macOS only ####################################################
+#####################################################################
 
 
 # -------------------------- NVM ------------------------------------
@@ -82,10 +88,6 @@ fi
 
 export DJANGO_DEBUG=1
 
-# otherwise, paralell test running can fail because Apple libc is a mess
-if [ $HOST != "Jacks-MacBook-Pro.local" ] ; then
-    export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-fi
 
 # -------------------------- OH-MY-ZSH ------------------------------
 
@@ -112,11 +114,7 @@ plugins=(git vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
-# add a cloud to the prompt when I am not on my own machine so I don't get
-# confused
+# add a cloud to the prompt when I am not on my own machine
 if [ $HOST != "Jacks-MacBook-Pro.local" ] ; then
     export PROMPT="☁️  $PROMPT"
 fi
-
-
-
