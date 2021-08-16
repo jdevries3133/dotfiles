@@ -4,8 +4,8 @@
 
 mkdir $HOME/.mutt
 
-ln -s $(pwd)/mutt/muttrc $HOME/.muttrc
-ln -s $(pwd)/mutt/view_attachment.sh $HOME/.mutt/view_attachment.sh
-ln -s $(pwd)/mutt/mailcap $HOME/.mailcap
+ln -s $(pwd)/muttrc $HOME/.muttrc
+ln -s $(pwd)/mutt_view_attachment.sh $HOME/.mutt/view_attachment.sh
+ln -s $(pwd)/mailcap $HOME/.mailcap
 
-vim $(pwd)/mutt/example_client_config
+vim $(pwd)/mutt_example_client_config
