@@ -17,3 +17,4 @@ bash setup_scripts/nvm.sh $NODE_VERSION
 bash setup_scripts/zsh_setup.sh
 bash setup_scripts/vim.sh
 bash setup_scripts/mutt.sh
+bash setup_scripts/irssi.sh
