@@ -13,18 +13,20 @@ macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/jdevries.empacad.o
 bind index G imap-fetch-mail
 
 
-
 # My Preferences
 # ----------------------------------------------------
 
 set spoolfile = "+INBOX"
 set record = ~/.mutt/sent
+set postponed = ~/.mutt/postponed
 set header_cache = ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies
 set certificate_file = ~/.mutt/certificates
 set move = no
 set sort = "reverse-threads"
 set sort_aux = "date-received"
+set autoedit = yes
+set edit_headers = yes
 
 
 

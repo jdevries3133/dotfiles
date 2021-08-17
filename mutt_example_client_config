@@ -13,3 +13,4 @@ set realname = "Jack DeVries"
 set folder = "imaps://imap.gmail.com:993"
 set spoolfile = "+INBOX"
 set smtp_authenticators = 'gssapi:login'
+set signature = "~/.mutt/[[ SIGNATURE FILE ]] "
