@@ -19,7 +19,10 @@ alias sl="screen -ls"
 # misc
 alias nt="nvim -c \"terminal\""
 alias temp="cd $(mktemp -d)"
+
+# git
 alias ggg="nvim ~/.oh-my-zsh/plugins/git/README.md"
+alias gsur"git submodule update --remote --merge"
 
 
 
