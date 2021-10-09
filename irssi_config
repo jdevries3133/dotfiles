@@ -144,7 +144,7 @@ chatnets = {
   };
   libera = {
     type = "IRC";
-    autosendcmd = "/^msg nickserv identify {{{ password }}};wait 2000 libera
+    autosendcmd = "/^msg nickserv identify {{{ password }}};wait 5000";
   };
 };
 

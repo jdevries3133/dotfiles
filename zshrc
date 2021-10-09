@@ -65,6 +65,10 @@ export PATH="/opt/homebrew/opt/autoconf@2.69/bin:$PATH"
 
 export LDFLAGS="$LDFLAGS -L/opt/homebrew/Cellar/gmp/6.2.1/lib"
 
+# -------------------------- DJANGO ---------------------------------
+
+export DJANGO_DEBUG=1
+
 
 # -------------------------- MACOS STUPIDITY ------------------------
 
@@ -98,9 +102,6 @@ if [[ -d $HOME/.pyenv ]] ; then
     eval "$(pyenv init -)"
 fi
 
-# -------------------------- DJANGO ---------------------------------
-
-export DJANGO_DEBUG=1
 
 
 # -------------------------- OH-MY-ZSH ------------------------------

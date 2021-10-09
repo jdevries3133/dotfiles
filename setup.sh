@@ -10,6 +10,7 @@
 PYTHON_VERSION=3.9.6
 NODE_VERSION="--lts"
 
+# order matters for some of these, so the sequence is listed explicitly
 [[ $OSTYPE == "darwin"* ]] && bash setup_scripts/install_homebrew.sh
 bash setup_scripts/git.sh
 bash setup_scripts/pyenv.sh $PYTHON_VERSION
@@ -18,3 +19,4 @@ bash setup_scripts/zsh_setup.sh
 bash setup_scripts/vim.sh
 bash setup_scripts/mutt.sh
 bash setup_scripts/irssi.sh
+bash setup_scripts/screen.sh
