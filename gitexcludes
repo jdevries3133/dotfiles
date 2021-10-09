@@ -13,3 +13,7 @@
 Session.vim
 notes.md
 venv
+
+# clangd artifacts
+.cache
+compile_commands.json

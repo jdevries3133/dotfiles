@@ -3,7 +3,7 @@ folder-hook 'jdevries3133.gmail.com' 'source ~/.mutt/jdevries3133.gmail.com'
 folder-hook 'jdevries.empacad.org' 'source ~/.mutt/jdevries.empacad.org'
 
 # Default account
-source ~/.mutt/jdevries3133.gmail.com
+source ~/.mutt/jdevries.empacad.org
 
 # Macros for switching accounts
 macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/jdevries3133.gmail.com<enter><change-folder>!<enter>'

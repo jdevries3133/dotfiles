@@ -3,6 +3,8 @@
 export EDITOR="nvim"
 export PATH=$PATH:/Users/johndevries/bin
 
+source ~/.env
+
 # venv-related aliases
 VENV_NAME="venv"
 alias vnv="python3 -m venv $VENV_NAME \
@@ -32,11 +34,20 @@ alias gsur="git submodule update --remote --merge"
 #####################################################################
 if [[ $OSTYPE == "darwin"* ]] ; then
 
+export XDG_CONFIG_HOME=$HOME/.config
+
+# temp; trying to debug nvim crashing
+ulimit -c unlimited
+
 
 # -------------------------- HOMEBREW -------------------------------
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+
+# -------------------------- TEACHER HELPER -------------------------------
+
+export HELPER_DATA="$HOME/.teacherhelper"
 
 # -------------------------- OPENSSL --------------------------------
 
@@ -80,7 +91,7 @@ export NVM_DIR="$HOME/.nvm"
 if [[ -d $HOME/.pyenv ]] ; then
     # Add pyenv executable to PATH and enable shims
     export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
+    export PATH="$PYENV_ROOT/versions/3.9.6/bin:$PATH"
     eval "$(pyenv init --path)"
 
     # Load pyenv into the shell
@@ -113,7 +124,7 @@ DISABLE_UPDATE_PROMPT="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
