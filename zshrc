@@ -7,7 +7,7 @@ source ~/.env
 
 # venv-related aliases
 VENV_NAME="venv"
-alias vnv="python3 -m venv $VENV_NAME \
+alias vnv="python3.10 -m venv $VENV_NAME \
     && source $VENV_NAME/bin/activate \
     && pip install --upgrade pip"
 alias vnvr="vnv && pip install -r requirements.txt"
