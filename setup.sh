@@ -7,6 +7,13 @@
 # - macOS
 # - linux with the apt package manager
 
+if [ "$EUID" -eq 0 ]
+  then echo "Do not run this script as root"
+  exit 1
+fi
+
+exit 0
+
 PYTHON_VERSION=3.9.6
 NODE_VERSION="--lts"
 
