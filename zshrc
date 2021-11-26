@@ -149,6 +149,6 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # add a cloud to the prompt when I am not on my own machine
-if [[ $HOST == "Jacks-MacBook-Pro"* ]] ; then
+if [[ $USER != 'johndevries' ]] ; then
     export PROMPT="☁️  $PROMPT"
 fi
