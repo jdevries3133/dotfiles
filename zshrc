@@ -104,6 +104,7 @@ export CPPFLAGS="-I/opt/homebrew/opt/mysql-client/include"
 
 export PATH=$PATH:/Users/johndevries/Library/Python/3.8/bin
 
+
 # -------------------------- DJANGO ---------------------------------
 
 export DJANGO_DEBUG=1
