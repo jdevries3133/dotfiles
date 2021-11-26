@@ -65,6 +65,15 @@ export PATH="/opt/homebrew/opt/autoconf@2.69/bin:$PATH"
 
 export LDFLAGS="$LDFLAGS -L/opt/homebrew/Cellar/gmp/6.2.1/lib"
 
+<<<<<<< HEAD
+=======
+# -------------------------- LLVM ---------------------------------
+
+# export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/llvm/lib"
+# export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/llvm/include"
+
+
+>>>>>>> origin
 # -------------------------- DJANGO ---------------------------------
 
 export DJANGO_DEBUG=1
@@ -75,6 +84,14 @@ export DJANGO_DEBUG=1
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY="YES"
 
 
+<<<<<<< HEAD
+=======
+# -------------------------- PYTHON ---------------------------------
+
+export PATH=$PATH:/Users/johndevries/Library/Python/3.8/bin
+
+
+>>>>>>> origin
 #####################################################################
 fi  # macOS only ####################################################
 #####################################################################
