@@ -1,3 +1,28 @@
+# -------------------------- INITIALIZATION -------------------------
+
+# homebrew
+if [[ $OSTYPE == "darwin"* ]] ; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# pyenv
+if [[ -d $HOME/.pyenv ]] ; then
+    # Add pyenv executable to PATH and enable shims
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/versions/3.9.6/bin:$PATH"
+    eval "$(pyenv init --path)"
+
+    # Load pyenv into the shell
+    eval "$(pyenv init -)"
+fi
+
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
 # -------------------------- PREFERENCES & SHORTCUTS ----------------
 
 export EDITOR="nvim"
@@ -26,64 +51,66 @@ alias temp="cd $(mktemp -d)"
 alias ggg="nvim ~/.oh-my-zsh/plugins/git/README.md"
 alias gsur="git submodule update --remote --merge"
 
+# bat
+which bat > /dev/null
+if [[ $? -eq 0 ]] then
+    alias cat="bat"
+fi
+
+
 
 
 #####################################################################
 ############################   macOS   ##############################
 ############################   only    ##############################
-#####################################################################
 if [[ $OSTYPE == "darwin"* ]] ; then
+#####################################################################
+
 
 export XDG_CONFIG_HOME=$HOME/.config
-
-# temp; trying to debug nvim crashing
-ulimit -c unlimited
-
-
-# -------------------------- HOMEBREW -------------------------------
-
-eval "$(/opt/homebrew/bin/brew shellenv)"
 
 
 # -------------------------- TEACHER HELPER -------------------------------
 
 export HELPER_DATA="$HOME/.teacherhelper"
 
-# -------------------------- OPENSSL --------------------------------
+# -------------------------- HOMEBREW PACKAGES --------------------------------
 
+# openssl
 export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/openssl@1.1/lib"
 export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/openssl@1.1/include"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@1.1/lib/pkgconfig"
 
 
-# -------------------------- AUTOCONF -------------------------------
-
+# autoconf 
 export PATH="/opt/homebrew/opt/autoconf@2.69/bin:$PATH"
 
-# -------------------------- LIBGMP ---------------------------------
-# (gdb build dependency)
-
-export LDFLAGS="$LDFLAGS -L/opt/homebrew/Cellar/gmp/6.2.1/lib"
-
-# -------------------------- LLVM ---------------------------------
-
-# export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/llvm/lib"
-# export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/llvm/include"
+# postgres
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 
-# -------------------------- DJANGO ---------------------------------
+# llvm
+export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/llvm/lib"
+export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/llvm/include"
 
-export DJANGO_DEBUG=1
+# mysql-client
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/mysql-client/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/mysql-client/include"
 
-
-# -------------------------- MACOS STUPIDITY ------------------------
-
-export OBJC_DISABLE_INITIALIZE_FORK_SAFETY="YES"
 
 
 # -------------------------- PYTHON ---------------------------------
 
 export PATH=$PATH:/Users/johndevries/Library/Python/3.8/bin
+
+# -------------------------- DJANGO ---------------------------------
+
+export DJANGO_DEBUG=1
+
+# -------------------------- MACOS STUPIDITY ------------------------
+
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY="YES"
 
 
 #####################################################################
@@ -92,26 +119,6 @@ fi  # macOS only ####################################################
 
 
 # -------------------------- NVM ------------------------------------
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-
-
-# -------------------------- PYENV ----------------------------------
-
-# on ubuntu, I don't always use pyenv because of the whole apt-python
-# chaos situation
-if [[ -d $HOME/.pyenv ]] ; then
-    # Add pyenv executable to PATH and enable shims
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/versions/3.9.6/bin:$PATH"
-    eval "$(pyenv init --path)"
-
-    # Load pyenv into the shell
-    eval "$(pyenv init -)"
-fi
 
 
 
@@ -141,6 +148,6 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # add a cloud to the prompt when I am not on my own machine
-if [ $HOST != "Jacks-MacBook-Pro.local" ] ; then
+if [[ $HOST == "Jacks-MacBook-Pro"* ]] ; then
     export PROMPT="☁️  $PROMPT"
 fi
