@@ -26,7 +26,8 @@ export NVM_DIR="$HOME/.nvm"
 # -------------------------- PREFERENCES & SHORTCUTS ----------------
 
 export EDITOR="nvim"
-export PATH=$PATH:/Users/johndevries/bin
+export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$HOME/.local/bin
 
 source ~/.env
 
