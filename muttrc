@@ -8,6 +8,7 @@ source ~/.mutt/jdevries.empacad.org
 # Macros for switching accounts
 macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/jdevries3133.gmail.com<enter><change-folder>!<enter>'
 macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/jdevries.empacad.org<enter><change-folder>!<enter>'
+macro index <f4> '<sync-mailbox><enter-command>source ~/.mutt/jack@mail.classfast.app<enter><change-folder>!<enter>'
 
 # Fetch mail shortcut
 bind index G imap-fetch-mail
