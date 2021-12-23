@@ -11,7 +11,6 @@ if [[ -d $HOME/.pyenv ]] ; then
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/versions/3.9.6/bin:$PATH"
     eval "$(pyenv init --path)"
-
     # Load pyenv into the shell
     eval "$(pyenv init -)"
 fi
@@ -29,6 +28,9 @@ export EDITOR="nvim"
 export PATH=$PATH:/Users/johndevries/bin
 
 source ~/.env
+
+# generic push notes to GitHub
+alias notes="pushd $HOME/notes; git add -A && git commit -m "." && git push > /dev/null; popd"
 
 # venv-related aliases
 VENV_NAME="venv"
