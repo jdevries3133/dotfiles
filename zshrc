@@ -46,6 +46,9 @@ alias ss="screen -d -r" # screen session
 alias sn="screen -S"    # screen new (session)
 alias sl="screen -ls"
 
+# terraform
+alias tf="terraform"
+
 # misc
 alias nt="nvim -c \"terminal\""
 alias temp="cd $(mktemp -d)"
