@@ -24,6 +24,8 @@ export NVM_DIR="$HOME/.nvm"
 
 # -------------------------- PREFERENCES & SHORTCUTS ----------------
 
+alias dl="youtube-dl -x"
+
 export EDITOR="nvim"
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/.local/bin
@@ -62,6 +64,9 @@ which bat > /dev/null
 if [[ $? -eq 0 ]] then
     alias cat="bat"
 fi
+
+# kubectl
+alias kubeall="kubectl get all --all-namespaces"
 
 
 
