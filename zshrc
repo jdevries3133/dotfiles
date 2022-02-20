@@ -70,6 +70,10 @@ alias kubeall="kubectl get all --all-namespaces"
 alias k="kubectl"
 
 
+# make fzf index hidden directories
+export FZF_DEFAULT_COMMAND='fd --type f -H'
+
+
 
 
 #####################################################################
@@ -156,7 +160,7 @@ DISABLE_UPDATE_PROMPT="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
