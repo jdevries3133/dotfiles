@@ -67,6 +67,7 @@ fi
 
 # kubectl
 alias kubeall="kubectl get all --all-namespaces"
+alias k="kubectl"
 
 
 
