@@ -29,6 +29,7 @@ alias dl="youtube-dl -x"
 export EDITOR="nvim"
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/.local/bin
+export KUBE_CONFIG_PATH=$HOME/.kube/config
 
 source ~/.env
 
@@ -69,11 +70,20 @@ fi
 alias kubeall="kubectl get all --all-namespaces"
 alias k="kubectl"
 
+# docker
+alias d="docker"
+alias de="docker exec"
+alias dei="docker exec -it"
+alias dl="docker logs"
+alias dp="docker ps"
+alias dc="docker-compose"
+alias dcu="docker-compose up"
+alias dcd="docker-compose down"
+alias dcb="docker-compose build"
+alias dcl="docker-compose logs"
 
 # make fzf index hidden directories
 export FZF_DEFAULT_COMMAND='fd --type f -H'
-
-
 
 
 #####################################################################
@@ -82,6 +92,7 @@ export FZF_DEFAULT_COMMAND='fd --type f -H'
 if [[ $OSTYPE == "darwin"* ]] ; then
 #####################################################################
 
+nvm use --lts > /dev/null
 
 export XDG_CONFIG_HOME=$HOME/.config
 
@@ -168,3 +179,5 @@ source $ZSH/oh-my-zsh.sh
 if [[ $USER != 'johndevries' ]] ; then
     export PROMPT="☁️  $PROMPT"
 fi
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

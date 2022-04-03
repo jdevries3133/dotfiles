@@ -5,3 +5,5 @@
 [user]
 	name = Jack DeVries
 	email = jdevries3133@gmail.com
+[log]
+    decorate = true
