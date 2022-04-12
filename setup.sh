@@ -12,8 +12,6 @@ if [ "$EUID" -eq 0 ]
   exit 1
 fi
 
-exit 0
-
 PYTHON_VERSION=3.9.6
 NODE_VERSION="--lts"
 
