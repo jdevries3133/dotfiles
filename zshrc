@@ -31,7 +31,9 @@ export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/.local/bin
 export KUBE_CONFIG_PATH=$HOME/.kube/config
 
-source ~/.env
+if [[ -f .env ]] then
+    source ~/.env
+fi
 
 # generic push notes to GitHub
 alias notes="pushd $HOME/notes; git add -A && git commit -m "." && git push > /dev/null; popd"
@@ -79,8 +81,12 @@ alias dp="docker ps"
 alias dc="docker-compose"
 alias dcu="docker-compose up"
 alias dcd="docker-compose down"
+alias dcr="docker-compose restart"
 alias dcb="docker-compose build"
 alias dcl="docker-compose logs"
+
+# GNU Make
+alias m="make"
 
 # make fzf index hidden directories
 export FZF_DEFAULT_COMMAND='fd --type f -H'
