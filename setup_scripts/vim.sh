@@ -20,6 +20,8 @@ vim -c 'PlugInstall'
 # neovim
 # =====
 
+sudo apt-get install -y neovim
+
 # symlink config
 mkdir -p $HOME/.config
 ln -s $(pwd)/nvim $HOME/.config/nvim
