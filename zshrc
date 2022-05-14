@@ -84,12 +84,16 @@ alias dcd="docker-compose down"
 alias dcr="docker-compose restart"
 alias dcb="docker-compose build"
 alias dcl="docker-compose logs"
+# kind of my "default" docker-compose start command
+alias ddd="docker-compose up -d && docker-compose logs -f"
 
 # GNU Make
 alias m="make"
 
 # make fzf index hidden directories
 export FZF_DEFAULT_COMMAND='fd --type f -H'
+
+alias myip="curl http://checkip.amazonaws.com"
 
 
 #####################################################################
