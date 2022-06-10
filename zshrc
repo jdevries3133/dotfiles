@@ -127,14 +127,14 @@ export XDG_CONFIG_HOME=$HOME/.config
 # openssl@1.1.1
 export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/openssl@1.1/lib"
 export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/openssl@1.1/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@1.1/lib/pkgconfig"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@1.1/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 
 # openssl@3
 export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
-export LDFLAGS="-L/opt/homebrew/opt/openssl@3/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/openssl@3/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig"
+export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/openssl@3/lib"
+export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/openssl@3/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 
 # autoconf 
@@ -148,19 +148,19 @@ export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/llvm/include"
 
 # bison
 export PATH="/opt/homebrew/opt/bison/bin:$PATH"
-export LDFLAGS="-L/opt/homebrew/opt/bison/lib"
+export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/bison/lib"
 
 
 # zlib
-export LDFLAGS="-L/opt/homebrew/opt/zlib/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/zlib/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/zlib/lib/pkgconfig"
+export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/zlib/lib"
+export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/zlib/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/zlib/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 # libpq (comment out for postgres development!)
 export PATH="/opt/homebrew/opt/cyrus-sasl/sbin:$PATH"
-export LDFLAGS="-L/opt/homebrew/opt/cyrus-sasl/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/cyrus-sasl/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/cyrus-sasl/lib/pkgconfig"
+export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/cyrus-sasl/lib"
+export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/cyrus-sasl/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/cyrus-sasl/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 # flutter
 export PATH="/Users/johndevries/flutter/bin:$PATH"
