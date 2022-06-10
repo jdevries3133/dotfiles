@@ -127,28 +127,54 @@ export HELPER_DATA="$HOME/.teacherhelper"
 
 # -------------------------- HOMEBREW PACKAGES --------------------------------
 
-# openssl
+
+# openssl@1.1.1
 export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/openssl@1.1/lib"
+export CC_x86_64_unknown_linux_gnu=x86_64-unknown-linux-gnu-gcc
 export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/openssl@1.1/include"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@1.1/lib/pkgconfig"
 
 
+# openssl@3
+export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/openssl@3/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/openssl@3/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig"
+
+
 # autoconf 
 export PATH="/opt/homebrew/opt/autoconf@2.69/bin:$PATH"
-
-# postgres
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 
 # llvm
 export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/llvm/lib"
 export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/llvm/include"
 
-# mysql-client
-export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
-export LDFLAGS="-L/opt/homebrew/opt/mysql-client/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/mysql-client/include"
 
+# bison
+export PATH="/opt/homebrew/opt/bison/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/bison/lib"
+
+
+# zlib
+export LDFLAGS="-L/opt/homebrew/opt/zlib/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/zlib/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/zlib/lib/pkgconfig"
+
+# libpq (comment out for postgres development!)
+export PATH="/opt/homebrew/opt/cyrus-sasl/sbin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/cyrus-sasl/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/cyrus-sasl/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/cyrus-sasl/lib/pkgconfig"
+
+# flutter
+export PATH="/Users/johndevries/flutter/bin:$PATH"
+
+# mac cross compilation tools from https://github.com/messense/homebrew-macos-cross-toolchains
+# these aliases allow `rustc` to use the toolchain as well
+export CXX_x86_64_unknown_linux_gnu=x86_64-unknown-linux-gnu-g++
+export AR_x86_64_unknown_linux_gnu=x86_64-unknown-linux-gnu-ar
+export CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER=x86_64-unknown-linux-gnu-gcc
 
 
 # -------------------------- PYTHON ---------------------------------
