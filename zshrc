@@ -121,10 +121,6 @@ nvm use --lts > /dev/null
 export XDG_CONFIG_HOME=$HOME/.config
 
 
-# -------------------------- TEACHER HELPER -------------------------------
-
-export HELPER_DATA="$HOME/.teacherhelper"
-
 # -------------------------- HOMEBREW PACKAGES --------------------------------
 
 
