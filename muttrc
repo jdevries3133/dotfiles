@@ -58,16 +58,13 @@ bind index,pager         N         search-opposite
 bind index               <Backtab> previous-new-then-unread
 
 # Go to folder...
-macro index,pager gi "<change-folder>=INBOX<enter>"       "open inbox"
-macro index,pager gd "<change-folder>=Drafts<enter>"      "open drafts"
-macro index,pager gs "<change-folder>=Sent<enter>"        "open sent"
-macro index,pager gt "<change-folder>$trash<enter>"       "open trash"
-macro index,pager gf "<change-folder>?"                   "open mailbox..."
+macro index,pager gi "<change-folder>=INBOX<enter>"             "open inbox"
+macro index,pager gf "<change-folder>?"                         "open mailbox..."
 
 # Actions
 # ----------------------------------------------------
 
-macro index          A "<save-message>=Archive<enter>" "Archive Message"
+macro index          A "<save-message>=Archive<enter>\n" "Archive Message"
 bind  index,pager    a   group-reply
 macro index,pager    dd  "<delete-message>"                                               "move message to trash"
 macro index,pager    dat "<delete-thread><sync-mailbox>"                                  "move thread to trash"
