@@ -81,14 +81,28 @@ alias dp="docker ps"
 alias dc="docker-compose"
 alias dcu="docker-compose up"
 alias dcd="docker-compose down"
-alias dcr="docker-compose restart"
-alias dcb="docker-compose build"
 alias dcl="docker-compose logs"
-# kind of my "default" docker-compose start command
-alias ddd="docker-compose up -d && docker-compose logs -f"
 
-# GNU Make
+# git worktree
+alias gwa="git worktree add"
+alias gwl="git worktree list"
+alias gwr="git worktree remove"
+
+# tmux (warning: collisions with trunk)
+alias t="tmux"
+alias tl="tmux ls"
+alias ta="tmux attach-session -t"
+
+# Make
 alias m="make"
+
+# cargo
+alias c="cargo"
+alias cr="cargo run"
+alias cb="cargo build"
+
+# trunk (warning: collisions with tmux)
+alias ts="trunk serve"
 
 # make fzf index hidden directories
 export FZF_DEFAULT_COMMAND='fd --type f -H'
