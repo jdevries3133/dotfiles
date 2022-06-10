@@ -130,7 +130,6 @@ export HELPER_DATA="$HOME/.teacherhelper"
 
 # openssl@1.1.1
 export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/openssl@1.1/lib"
-export CC_x86_64_unknown_linux_gnu=x86_64-unknown-linux-gnu-gcc
 export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/openssl@1.1/include"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@1.1/lib/pkgconfig"
 
@@ -172,6 +171,7 @@ export PATH="/Users/johndevries/flutter/bin:$PATH"
 
 # mac cross compilation tools from https://github.com/messense/homebrew-macos-cross-toolchains
 # these aliases allow `rustc` to use the toolchain as well
+export CC_x86_64_unknown_linux_gnu=x86_64-unknown-linux-gnu-gcc
 export CXX_x86_64_unknown_linux_gnu=x86_64-unknown-linux-gnu-g++
 export AR_x86_64_unknown_linux_gnu=x86_64-unknown-linux-gnu-ar
 export CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER=x86_64-unknown-linux-gnu-gcc
@@ -194,9 +194,6 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY="YES"
 #####################################################################
 fi  # macOS only ####################################################
 #####################################################################
-
-
-# -------------------------- NVM ------------------------------------
 
 
 
