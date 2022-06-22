@@ -26,7 +26,7 @@ export NVM_DIR="$HOME/.nvm"
 
 alias dl="youtube-dl -x"
 
-export EDITOR="nvim"
+export EDITOR=$(which nvim)
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/.local/bin
 export KUBE_CONFIG_PATH=$HOME/.kube/config
@@ -92,6 +92,7 @@ alias gwr="git worktree remove"
 alias t="tmux"
 alias tl="tmux ls"
 alias ta="tmux attach-session -t"
+alias tn="tmux new-session -t"
 
 # Make
 alias m="make"
@@ -120,6 +121,8 @@ nvm use --lts > /dev/null
 
 export XDG_CONFIG_HOME=$HOME/.config
 
+stty dsusp undef  # Disable DSUSP, which cause ^y to put process in background
+
 
 # -------------------------- HOMEBREW PACKAGES --------------------------------
 
@@ -137,24 +140,13 @@ export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/openssl@3/include"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 
-# autoconf 
+# autoconf
 export PATH="/opt/homebrew/opt/autoconf@2.69/bin:$PATH"
-
-
-# llvm
-export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/llvm/lib"
-export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/llvm/include"
-
 
 # bison
 export PATH="/opt/homebrew/opt/bison/bin:$PATH"
 export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/bison/lib"
 
-
-# zlib
-export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/zlib/lib"
-export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/zlib/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/zlib/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 # libpq (comment out for postgres development!)
 export PATH="/opt/homebrew/opt/cyrus-sasl/sbin:$PATH"

@@ -17,6 +17,7 @@ application/excel; /Users/johndevries/.mutt/view_attachment.sh %s
 application/msexcel; /Users/johndevries/.mutt/view_attachment.sh %s
 application/vnd.ms-exc; /Users/johndevries/.mutt/view_attachment.sh %s
 application/vnd.ms-excel; /Users/johndevries/.mutt/view_attachment.sh %s
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Numbers.app'
 
 # MS Word
 application/msword; /Users/johndevries/.mutt/view_attachment.sh %s "-" '/Applications/Pages.app'

@@ -1,13 +1,11 @@
 # Folder hooks
 folder-hook 'jdevries3133.gmail.com' 'source ~/.mutt/jdevries3133.gmail.com'
-folder-hook 'jdevries.empacad.org' 'source ~/.mutt/jdevries.empacad.org'
 
 # Default account
 source ~/.mutt/jdevries3133.gmail.com
 
 # Macros for switching accounts
 macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/jdevries3133.gmail.com<enter><change-folder>!<enter>'
-macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/jdevries.empacad.org<enter><change-folder>!<enter>'
 
 
 # My Preferences
@@ -64,7 +62,7 @@ macro index,pager gf "<change-folder>?"                         "open mailbox...
 # Actions
 # ----------------------------------------------------
 
-macro index          A "<save-message>=Archive<enter>\n" "Archive Message"
+macro index          A "<save-message>=Archive<enter>" "Archive Message"
 bind  index,pager    a   group-reply
 macro index,pager    dd  "<delete-message>"                                               "move message to trash"
 macro index,pager    dat "<delete-thread><sync-mailbox>"                                  "move thread to trash"
