@@ -1,4 +1,4 @@
-# -------------------------- INITIALIZATION -------------------------
+# -------------------------- ENVIRONMENT ----------------------------
 
 # homebrew
 if [[ $OSTYPE == "darwin"* ]] ; then
@@ -19,24 +19,23 @@ fi
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-
-# -------------------------- PREFERENCES & SHORTCUTS ----------------
-
-alias dl="youtube-dl -x"
 
 export EDITOR=$(which nvim)
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/.local/bin
 export KUBE_CONFIG_PATH=$HOME/.kube/config
 
-if [[ -f .env ]] then
+# make fzf index hidden directories
+export FZF_DEFAULT_COMMAND='fd --type f -H'
+
+if [[ -f ~/.env ]] then
     source ~/.env
 fi
 
-# generic push notes to GitHub
-alias notes="pushd $HOME/notes; git add -A && git commit -m "." && git push > /dev/null; popd"
+
+# -------------------------- ALIASES --------------------------------
+
 
 # venv-related aliases
 VENV_NAME="venv"
@@ -105,10 +104,7 @@ alias cb="cargo build"
 # trunk (warning: collisions with tmux)
 alias ts="trunk serve"
 
-# make fzf index hidden directories
-export FZF_DEFAULT_COMMAND='fd --type f -H'
-
-alias myip="curl http://checkip.amazonaws.com"
+alias listen="lsof -i -P -n | grep LISTEN"
 
 
 #####################################################################
@@ -121,7 +117,9 @@ nvm use --lts > /dev/null
 
 export XDG_CONFIG_HOME=$HOME/.config
 
-stty dsusp undef  # Disable DSUSP, which cause ^y to put process in background
+# Disable DSUSP, which cause ^y to put process in background
+# good for mutt because I can scroll up without exiting
+stty dsusp undef
 
 
 # -------------------------- HOMEBREW PACKAGES --------------------------------
@@ -165,11 +163,6 @@ export AR_x86_64_unknown_linux_gnu=x86_64-unknown-linux-gnu-ar
 export CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER=x86_64-unknown-linux-gnu-gcc
 
 
-# -------------------------- PYTHON ---------------------------------
-
-export PATH=$PATH:/Users/johndevries/Library/Python/3.8/bin
-
-
 # -------------------------- DJANGO ---------------------------------
 
 export DJANGO_DEBUG=1
@@ -187,9 +180,6 @@ fi  # macOS only ####################################################
 
 # -------------------------- OH-MY-ZSH ------------------------------
 
-# Make zsh path act like bash path
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -197,9 +187,7 @@ ZSH_THEME="robbyrussell"
 
 HYPHEN_INSENSITIVE="true"
 
-# automatically update without prompting.
 DISABLE_UPDATE_PROMPT="true"
-
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -209,10 +197,3 @@ DISABLE_UPDATE_PROMPT="true"
 plugins=(git vi-mode)
 
 source $ZSH/oh-my-zsh.sh
-
-# add a cloud to the prompt when I am not on my own machine
-if [[ $USER != 'johndevries' ]] ; then
-    export PROMPT="☁️  $PROMPT"
-fi
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
