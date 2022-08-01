@@ -113,7 +113,7 @@ alias listen="lsof -i -P -n | grep LISTEN"
 if [[ $OSTYPE == "darwin"* ]] ; then
 #####################################################################
 
-nvm use --lts > /dev/null
+nvm use 16.15 > /dev/null
 
 export XDG_CONFIG_HOME=$HOME/.config
 
@@ -123,6 +123,9 @@ stty dsusp undef
 
 
 # -------------------------- HOMEBREW PACKAGES --------------------------------
+
+# mysql client
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 
 
 # openssl@1.1.1
