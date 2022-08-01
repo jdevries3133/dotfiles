@@ -1,11 +1,5 @@
-# Folder hooks
-folder-hook 'jdevries3133.gmail.com' 'source ~/.mutt/jdevries3133.gmail.com'
-
 # Default account
-source ~/.mutt/jdevries3133.gmail.com
-
-# Macros for switching accounts
-macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/jdevries3133.gmail.com<enter><change-folder>!<enter>'
+source ~/.mutt/jack@archlabs.com
 
 
 # My Preferences

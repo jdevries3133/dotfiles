@@ -4,6 +4,8 @@
 	rebase = false
 [user]
 	name = Jack DeVries
-	email = jdevries3133@gmail.com
+	email = jack@archlabs.com
 [log]
     decorate = true
+[commit]
+	template = /Users/jack/.gitmessage
