@@ -33,6 +33,8 @@ if [[ -f ~/.env ]] then
     source ~/.env
 fi
 
+alias kibana="k port-forward -n kube-system service/kibana-logging 5601"
+
 
 # -------------------------- ALIASES --------------------------------
 
