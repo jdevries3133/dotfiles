@@ -107,6 +107,22 @@ alias ts="trunk serve"
 alias listen="lsof -i -P -n | grep LISTEN"
 
 
+alias n="npm"
+alias nrs="npm run start"
+alias nrd="npm run dev"
+alias nrt="npm run test"
+alias ni="npm install"
+
+
+function nvims() {
+    if [ -f Session.vim ]; then
+        nvim -S Session.vim
+    else
+        echo "no session.vim file found"
+    fi
+}
+
+
 #####################################################################
 ############################   macOS   ##############################
 ############################   only    ##############################
