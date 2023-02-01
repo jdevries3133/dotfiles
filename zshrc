@@ -33,6 +33,8 @@ if [[ -f ~/.env ]] then
     source ~/.env
 fi
 
+alias kibana="k port-forward -n kube-system service/kibana-logging 5601"
+
 
 # -------------------------- ALIASES --------------------------------
 
@@ -86,6 +88,8 @@ alias dcl="docker-compose logs"
 alias gwa="git worktree add"
 alias gwl="git worktree list"
 alias gwr="git worktree remove"
+alias grao="git remote add origin"
+alias grro="git remote rm origin"
 
 # tmux (warning: collisions with trunk)
 alias t="tmux"
@@ -163,10 +167,10 @@ export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/bison/lib"
 
 
 # libpq (comment out for postgres development!)
-export PATH="/opt/homebrew/opt/cyrus-sasl/sbin:$PATH"
-export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/cyrus-sasl/lib"
-export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/cyrus-sasl/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/cyrus-sasl/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/libpq/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/libpq/lib/pkgconfig"
 
 # flutter
 export PATH="/Users/johndevries/flutter/bin:$PATH"
