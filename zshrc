@@ -108,6 +108,17 @@ alias cb="cargo build"
 # trunk (warning: collisions with tmux)
 alias ts="trunk serve"
 
+# npm
+alias n="npm"
+alias nr="npm run"
+alias nrt="npm run test"
+alias nrl="npm run lint"
+alias nrd="npm run dev"
+alias nrc="npm run check"
+alias nrs="npm run start"
+alias ni="npm install"
+alias nid="npm install --save-dev"
+
 alias listen="lsof -i -P -n | grep LISTEN"
 
 
@@ -201,3 +212,4 @@ DISABLE_UPDATE_PROMPT="true"
 plugins=(git vi-mode)
 
 source $ZSH/oh-my-zsh.sh
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
