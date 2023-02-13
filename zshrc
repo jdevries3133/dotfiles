@@ -144,8 +144,6 @@ function nvims() {
 if [[ $OSTYPE == "darwin"* ]] ; then
 #####################################################################
 
-nvm use --lts > /dev/null
-
 export XDG_CONFIG_HOME=$HOME/.config
 
 # Disable DSUSP, which cause ^y to put process in background
