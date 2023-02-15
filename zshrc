@@ -104,6 +104,7 @@ alias m="make"
 alias c="cargo"
 alias cr="cargo run"
 alias cb="cargo build"
+alias cf="cargo fmt"
 
 # trunk (warning: collisions with tmux)
 alias ts="trunk serve"
