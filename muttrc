@@ -64,11 +64,7 @@ macro index,pager gf "<change-folder>?"                         "open mailbox...
 
 macro index          A "<save-message>=Archive<enter>" "Archive Message"
 bind  index,pager    a   group-reply
-
-# I realize that making delete a single `d` instead of `dd` borks the `dat`
-# alias, which I don't use much. I'm not sure if I want to switch back, so I'll
-# keep `dat` around for now
-macro index,pager    d  "<delete-message>"                                               "move message to trash"
+macro index,pager    dd  "<delete-message>"                                               "move message to trash"
 macro index,pager    dat "<delete-thread><sync-mailbox>"                                  "move thread to trash"
 
 macro index,pager    ss  ":macro browser \\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015\"\015:macro browser q \"<exit>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015\"\015<save-message>?"                                                                                                                                     "save message to a mailbox"
