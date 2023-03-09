@@ -117,6 +117,7 @@ alias nrl="npm run lint"
 alias nrd="npm run dev"
 alias nrc="npm run check"
 alias nrs="npm run start"
+alias nrs="npm run build"
 alias ni="npm install"
 alias nid="npm install --save-dev"
 
@@ -233,3 +234,5 @@ alias gbc="gb --sort=committerdate"
 alias grbpr='git rebase -i $(git merge-base $(git_main_branch) HEAD)'
 alias grrs='git reset --soft'
 alias grl='git reflog'
+alias grph='git rev-parse HEAD'
+alias gp!='git push --force'
