@@ -100,6 +100,7 @@ alias cr="cargo run"
 alias cb="cargo build"
 alias cf="cargo fmt"
 alias ct="cargo test"
+alias cl="cargo clippy"
 
 # trunk (warning: collisions with tmux)
 alias ts="trunk serve"
@@ -151,42 +152,6 @@ stty dsusp undef
 # -------------------------- HOMEBREW PACKAGES --------------------------------
 
 
-# openssl@1.1.1
-export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/openssl@1.1/lib"
-export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/openssl@1.1/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@1.1/lib/pkgconfig:$PKG_CONFIG_PATH"
-
-
-# openssl@3
-export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
-export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/openssl@3/lib"
-export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/openssl@3/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig:$PKG_CONFIG_PATH"
-
-
-# autoconf
-export PATH="/opt/homebrew/opt/autoconf@2.69/bin:$PATH"
-
-# bison
-export PATH="/opt/homebrew/opt/bison/bin:$PATH"
-export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/bison/lib"
-
-
-# libpq (comment out for postgres development!)
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
-export LDFLAGS="-L/opt/homebrew/opt/libpq/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/libpq/lib/pkgconfig"
-
-# flutter
-export PATH="/Users/johndevries/flutter/bin:$PATH"
-
-# mac cross compilation tools from https://github.com/messense/homebrew-macos-cross-toolchains
-# these aliases allow `rustc` to use the toolchain as well
-export CC_x86_64_unknown_linux_gnu=x86_64-unknown-linux-gnu-gcc
-export CXX_x86_64_unknown_linux_gnu=x86_64-unknown-linux-gnu-g++
-export AR_x86_64_unknown_linux_gnu=x86_64-unknown-linux-gnu-ar
-export CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER=x86_64-unknown-linux-gnu-gcc
 
 
 # -------------------------- DJANGO ---------------------------------
