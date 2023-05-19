@@ -1,10 +1,3 @@
-# -------------------------- ENVIRONMENT ----------------------------
-
-# homebrew
-if [[ $OSTYPE == "darwin"* ]] ; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
 # pyenv
 if [[ -d $HOME/.pyenv ]] ; then
     # Add pyenv executable to PATH and enable shims
@@ -32,6 +25,8 @@ alias kibana="k port-forward -n kube-system service/kibana-logging 5601"
 
 # -------------------------- ALIASES --------------------------------
 
+# my darling boy
+alias n='nvim'
 
 # venv-related aliases
 VENV_NAME="venv"
@@ -106,7 +101,6 @@ alias cl="cargo clippy"
 alias ts="trunk serve"
 
 # npm
-alias n="npm"
 alias nr="npm run"
 alias nrt="npm run test"
 alias nrl="npm run lint"
@@ -114,18 +108,9 @@ alias nrd="npm run dev"
 alias nrc="npm run check"
 alias nrs="npm run start"
 alias nrs="npm run build"
-alias ni="npm install"
-alias nid="npm install --save-dev"
+alias nrtc="npm run typecheck"
 
 alias listen="lsof -i -P -n | grep LISTEN"
-
-
-alias n="npm"
-alias nrs="npm run start"
-alias nrd="npm run dev"
-alias nrt="npm run test"
-alias ni="npm install"
-
 
 function nvims() {
     if [ -f Session.vim ]; then
