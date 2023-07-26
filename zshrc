@@ -99,6 +99,7 @@ alias cl="cargo clippy"
 
 # trunk (warning: collisions with tmux)
 alias ts="trunk serve"
+alias tso="trunk serve --open"
 
 # npm
 alias nr="npm run"
