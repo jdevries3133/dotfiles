@@ -182,4 +182,17 @@ alias grrs='git reset --soft'
 alias grl='git reflog'
 alias grph='git rev-parse HEAD'
 alias gp!='git push --force'
+alias gpsup!='gpsup --force'
 alias gdpr='git diff $(git merge-base $(git_main_branch) HEAD) HEAD'
+alias gfix="git add -A; git commit -m 'fixup'; grbpr"
+alias gs!="git reset --hard jack; grbpr"
+function goo() {
+    branch=$(date '+jack__%m/%d/%Y__%s')
+    if [[ ! -z "$1" ]]
+    then
+        branch=$1
+    fi
+    gco -b $branch || gco $branch
+    grhh jack
+    grbpr
+}
