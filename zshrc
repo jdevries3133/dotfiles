@@ -183,7 +183,6 @@ alias grl='git reflog'
 alias grph='git rev-parse HEAD'
 alias gp!='git push --force'
 alias gpsup!='gpsup --force'
-alias gdpr='git diff $(git merge-base $(git_main_branch) HEAD) HEAD'
 alias gfix="git add -A; git commit -m 'fixup'; grbpr"
 alias gs!="git reset --hard jack; grbpr"
 function goo() {
@@ -195,4 +194,23 @@ function goo() {
     gco -b $branch || gco $branch
     grhh jack
     grbpr
+
+    # If a branch was not provided, we are, at this point, sitting on a crappy
+    # generated branch. Instead, let's create a semantic branch name from the
+    # commit message, destroying the temporary branch that we're on, so that
+    # we are left with a nicely named one.
+    if [[ -z "$1" ]]
+    then
+        # rename the branch to match the commit message
+        semantic_branch_name=$(
+            git log -1 --pretty='format:%s' | sed 's/ /-/g' | sed 's/(.*)//g' | sed 's/://g'
+        )
+        git branch -m $semantic_branch_name
+        if [[ $? != 0 ]]
+        then
+            git checkout $semantic_branch_name
+            git reset --hard $branch
+            git branch -D $branch
+        fi
+    fi
 }
