@@ -203,7 +203,7 @@ function goo() {
     then
         # rename the branch to match the commit message
         semantic_branch_name=$(
-            git log -1 --pretty='format:%s' | sed 's/ /-/g' | sed 's/(.*)//g' | sed 's/://g'
+            git log -1 --pretty='format:%s' | sed 's/ /-/g' | sed 's/(.*)//g' | sed 's/://g' | sed 's/\`//g'
         )
         git branch -m $semantic_branch_name
         if [[ $? != 0 ]]
