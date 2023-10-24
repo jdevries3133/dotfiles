@@ -59,8 +59,13 @@ if [[ $? -eq 0 ]] then
 fi
 
 # kubectl
-alias kubeall="kubectl get all --all-namespaces"
 alias k="kubectl"
+alias kd="kubectl describe"
+function kns() {
+    kubectl config set-context \
+        $(kubectl config current-context) \
+        --namespace=$1
+}
 
 # docker
 alias d="docker"
@@ -171,7 +176,7 @@ DISABLE_UPDATE_PROMPT="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode)
+plugins=(git kubectl vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
