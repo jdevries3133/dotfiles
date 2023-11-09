@@ -185,14 +185,34 @@ alias gp!='git push --force'
 alias gpsup!='gpsup --force'
 alias gfix="git add -A; git commit -m 'fixup'; grbpr"
 alias gs!="git reset --hard jack; grbpr"
+# Git branch name; for when I need to manually do the above workflow, but still want
+# a commit-stable branch name (maybe for later).
+function gbrn() {
+    merge_base_message="$(git log $(git merge-base $(git_main_branch) HEAD)...HEAD  --pretty='format:%s' | tail -n 1)"
+    sanitized_message=$(echo $merge_base_message \
+            | sed 's/ /-/g' \
+            | sed 's/(.*)//g' \
+            | sed 's/://g' \
+            | sed 's/\`//g' \
+            | sed 's/"//g' \
+            | sed 's/&//g' \
+            | sed "s/'//g" \
+            | sed "s/<//g" \
+            | sed "s/>//g" \
+            | sed 's/\///g'
+    )
+
+    echo $sanitized_message
+}
 function goo() {
+    starting_branch=$(git_current_branch)
     branch=$(date '+jack__%m/%d/%Y__%s')
     if [[ ! -z "$1" ]]
     then
         branch=$1
     fi
     gco -b $branch || gco $branch
-    grhh jack
+    grhh $starting_branch
     grbpr
 
     # If a branch was not provided, we are, at this point, sitting on a crappy
@@ -202,9 +222,7 @@ function goo() {
     if [[ -z "$1" ]]
     then
         # rename the branch to match the commit message
-        semantic_branch_name=$(
-            git log -1 --pretty='format:%s' | sed 's/ /-/g' | sed 's/(.*)//g' | sed 's/://g' | sed 's/\`//g'
-        )
+        semantic_branch_name=$(gbrn)
         git branch -m $semantic_branch_name
         if [[ $? != 0 ]]
         then
@@ -214,3 +232,10 @@ function goo() {
         fi
     fi
 }
+# Goo with a fixup before-hand
+function goof() {
+    gfix
+    goo $@
+}
+alias gbt='gb -D temp; gco -b temp'
+alias gp!='git push --force-with-lease'
