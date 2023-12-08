@@ -186,10 +186,8 @@ alias grbpr='git rebase -i $(git merge-base $(git_main_branch) HEAD)'
 alias grrs='git reset --soft'
 alias grl='git reflog'
 alias grph='git rev-parse HEAD'
-alias gp!='git push --force'
 alias gpsup!='gpsup --force'
 alias gfix="git add -A; git commit -m 'fixup'; grbpr"
-alias gs!="git reset --hard jack; grbpr"
 # Git branch name; for when I need to manually do the above workflow, but still want
 # a commit-stable branch name (maybe for later).
 function gbrn() {
@@ -219,6 +217,13 @@ function goo() {
     gco -b $branch || gco $branch
     grhh $starting_branch
     grbpr
+
+    # If the previous rebase had some merge conflicts, we're done; need to
+    # defer to the human.
+    if [[ "$?" != 0 ]]
+    then
+        return
+    fi
 
     # If a branch was not provided, we are, at this point, sitting on a crappy
     # generated branch. Instead, let's create a semantic branch name from the
