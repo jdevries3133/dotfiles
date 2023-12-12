@@ -126,6 +126,12 @@ function nvims() {
     fi
 }
 
+export MONGO_URI="mongodb://mongoadmin:supersecret@localhost:27017?authSource=admin"
+function mongoup() {
+    docker run -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=supersecret -d  mongo:latest
+    echo "connection string is $MONGO_URI"
+    echo 'available as $MONGO_URI'
+}
 
 #####################################################################
 ############################   macOS   ##############################
