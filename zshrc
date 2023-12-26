@@ -62,9 +62,14 @@ fi
 alias k="kubectl"
 alias kd="kubectl describe"
 function kns() {
-    kubectl config set-context \
-        $(kubectl config current-context) \
-        --namespace=$1
+    if [[ -z $1 ]]
+    then
+        kubectl get ns
+    else 
+        kubectl config set-context \
+            $(kubectl config current-context) \
+            --namespace=$1
+    fi
 }
 
 # docker
