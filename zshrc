@@ -62,9 +62,14 @@ fi
 alias k="kubectl"
 alias kd="kubectl describe"
 function kns() {
-    kubectl config set-context \
-        $(kubectl config current-context) \
-        --namespace=$1
+    if [[ -z $1 ]]
+    then
+        kubectl get ns
+    else 
+        kubectl config set-context \
+            $(kubectl config current-context) \
+            --namespace=$1
+    fi
 }
 
 # docker
@@ -126,6 +131,12 @@ function nvims() {
     fi
 }
 
+export MONGO_URI="mongodb://mongoadmin:supersecret@localhost:27017?authSource=admin"
+function mongoup() {
+    docker run -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=supersecret -d  mongo:latest
+    echo "connection string is $MONGO_URI"
+    echo 'available as $MONGO_URI'
+}
 
 #####################################################################
 ############################   macOS   ##############################

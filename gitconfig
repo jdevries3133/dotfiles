@@ -1,7 +1,7 @@
 [init]
 	defaultBranch = main
 [pull]
-	rebase = false
+	rebase = true
 [user]
 	name = Jack DeVries
 	email = jdevries3133@gmail.com
