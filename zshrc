@@ -202,7 +202,10 @@ function gbrn() {
             | sed "s/'//g" \
             | sed "s/<//g" \
             | sed "s/>//g" \
-            | sed 's/\///g'
+            | sed 's/\///g' \
+            | sed 's/\$//g' \
+            | sed 's/\[//g' \
+            | sed 's/\]//g'
     )
 
     echo $sanitized_message
@@ -247,5 +250,8 @@ function goof() {
     gfix
     goo $@
 }
+# I use this with my one-branch workflow to create visual delimiters. See
+# also https://jackdevries.com/post/oneBranch
+alias gdelim='git commit --allow-empty -m "-------------------------------"'
 alias gbt='gb -D temp; gco -b temp'
 alias gp!='git push --force-with-lease'
