@@ -266,3 +266,7 @@ function goof() {
 alias gdelim='git commit --allow-empty -m "-------------------------------"'
 alias gbt='gb -D temp; gco -b temp'
 alias gp!='git push --force-with-lease'
+# Note: I'm overriding `git blame`, but I never use git-blame from the command
+# line.
+alias gbl='git branch-log'
+alias greb='git fetch; git rebase -i origin/master'
