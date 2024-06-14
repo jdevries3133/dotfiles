@@ -270,3 +270,7 @@ alias gp!='git push --force-with-lease'
 # line.
 alias gbl='git branch-log'
 alias greb='git fetch; git rebase -i origin/master'
+
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-e' edit-command-line
