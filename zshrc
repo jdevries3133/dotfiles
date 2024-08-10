@@ -1,3 +1,9 @@
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-e' edit-command-line
+
+setopt rmstarsilent
+
 # pyenv
 if [[ -d $HOME/.pyenv ]] ; then
     # Add pyenv executable to PATH and enable shims
@@ -43,6 +49,7 @@ alias sl="screen -ls"
 
 # terraform
 alias tf="terraform"
+alias tfa!="terraform apply -auto-approve"
 
 # misc
 alias nt="nvim -c \"terminal\""
@@ -187,7 +194,7 @@ DISABLE_UPDATE_PROMPT="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git kubectl vi-mode)
+plugins=(git kubectl vi-mode terraform)
 
 source $ZSH/oh-my-zsh.sh
 export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
@@ -199,6 +206,7 @@ alias grl='git reflog'
 alias grph='git rev-parse HEAD'
 alias gpsup!='gpsup --force'
 alias gfix="git add -A; git commit -m 'fixup'; grbpr"
+
 # Git branch name; for when I need to manually do the above workflow, but still want
 # a commit-stable branch name (maybe for later).
 function gbrn() {
@@ -216,51 +224,93 @@ function gbrn() {
             | sed 's/\///g' \
             | sed 's/\$//g' \
             | sed 's/\[//g' \
-            | sed 's/\]//g'
+            | sed 's/\]//g' \
+            | sed 's/\*//g' \
+            | sed 's/\.//g' \
     )
 
     echo $sanitized_message
 }
+
+# `goo` is the essential glue of my One-Branch git workflow. See
+# https://jackdevries.com/post/oneBranch to learn more.
 function goo() {
+
+    # See https://chatgpt.com/share/b88cf4e0-519d-4d51-a47e-9013fc4ed23d
+    setopt sh_word_split
+
+    main_branch=$(git_main_branch)
     starting_branch=$(git_current_branch)
-    branch=$(date '+jack__%m/%d/%Y__%s')
-    if [[ ! -z "$1" ]]
-    then
-        branch=$1
-    fi
-    gco -b $branch || gco $branch
-    grhh $starting_branch
-    grbpr
+    auto_branch=$(date '+temp_goo__%m/%d/%Y__%s')
+    target_branch=$auto_branch
+
+    git checkout -b $auto_branch || git checkout $auto_branch
+    git reset --hard $starting_branch
+
+    # aka `grbpr`
+    git rebase -i $(git merge-base $(git_main_branch) HEAD)
 
     # If the previous rebase had some merge conflicts, we're done; need to
     # defer to the human.
-    if [[ "$?" != 0 ]]
+    if [ $? != 0 ]
     then
         return
     fi
 
-    # If a branch was not provided, we are, at this point, sitting on a crappy
-    # generated branch. Instead, let's create a semantic branch name from the
-    # commit message, destroying the temporary branch that we're on, so that
-    # we are left with a nicely named one.
-    if [[ -z "$1" ]]
+    # Rename the automatic branch to match the commit message, derived from
+    # the branch base commit.
+    semantic_branch_name=$(gbrn)
+    git branch -m $semantic_branch_name
+
+    # The semantic branch may already exist, in which case the above branch
+    # rename will have failed. In that case, we want to put this branch's
+    # commits onto that branch, with the caveat that it's nice to maintain
+    # a consistent merge-base on branches who have pull requests. If we're
+    # going to force-push, maintaining a consistent merge-base with the
+    # main branch allows the reviewer to directly diff the previous and
+    # current HEAD of the PR branch. GitHub and GitLab also have features in
+    # their web UI which work better if we maintain a consistent merge-base.
+    #
+    # To maintain a consistent merge-base, we will;
+    #
+    # 1. Checkout to the PR branch.
+    # 2. Hard-reset it to its own merge-base with the main branch.
+    # 3. Cherry-pick each commit from the generated branch onto this branch.
+    if [ $? != 0 ]
     then
-        # rename the branch to match the commit message
-        semantic_branch_name=$(gbrn)
-        git branch -m $semantic_branch_name
-        if [[ $? != 0 ]]
-        then
-            git checkout $semantic_branch_name
-            git reset --hard $branch
-            git branch -D $branch
-        fi
+        git checkout $semantic_branch_name
+        git reset --hard $(git merge-base $main_branch HEAD)
+        auto_branch_commits="$(
+            git log --format="%H" $main_branch..$auto_branch | tac | xargs
+        )"
+        for commit in $auto_branch_commits
+        do
+            git cherry-pick $commit
+
+            # Again, if the cherry-pick introduces conflicts, we need to stop
+            # and defer to the human. This could be exacerbated if your PR
+            # branch is too far behind. If that is the case, you can always
+            # manually rebase the PR branch on the main branch, which will
+            # update its merge-base to be closer to the current HEAD of
+            # the main branch.
+            if [ $? != 0 ]
+            then
+                return
+            fi
+        done
+
+        # Finally, delete the generated branch to cleanup after ourselves.
+        git branch -D $auto_branch
+
     fi
 }
+
 # Goo with a fixup before-hand
 function goof() {
     gfix
     goo $@
 }
+
 # I use this with my one-branch workflow to create visual delimiters. See
 # also https://jackdevries.com/post/oneBranch
 alias gdelim='git commit --allow-empty -m "-------------------------------"'
