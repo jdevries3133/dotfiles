@@ -217,13 +217,16 @@ alias grph='git rev-parse HEAD'
 alias gpsup!='gpsup --force'
 alias gfix="git add -A; git commit -m 'fixup'; grbpr"
 
-# Git branch name; for when I need to manually do the above workflow, but still want
-# a commit-stable branch name (maybe for later).
+
+# "git branch name" -- generate a name from the base commit title.
 function gbrn() {
-    merge_base_message="$(git log $(git merge-base $(git_main_branch) HEAD)...HEAD  --pretty='format:%s' | tail -n 1)"
-    sanitized_message=$(echo $merge_base_message \
+    main_branch="$(git_main_branch)"
+    base_commit="$(git merge-base $main_branch HEAD)"
+    first_commit="$(git log $base_commit...HEAD --pretty='format:%s' | tail -n 1)"
+    sanitized_message="$(echo $first_commit \
             | sed 's/ /-/g' \
-            | sed 's/(.*)//g' \
+            | sed 's/(/-/g' \
+            | sed 's/)//g' \
             | sed 's/://g' \
             | sed 's/\`//g' \
             | sed 's/"//g' \
@@ -237,7 +240,8 @@ function gbrn() {
             | sed 's/\]//g' \
             | sed 's/\*//g' \
             | sed 's/\.//g' \
-    )
+            | sed 's/`//g'
+    )"
 
     echo $sanitized_message
 }
@@ -353,6 +357,87 @@ if [ -f ~/shell-cfg.zsh ]
 then
     source ~/shell-cfg.zsh
 fi
+
 alias ycn='yap chat --new'
 alias yc='yap chat'
 
+find_free_port() {
+    for port in $(seq 1024 65535 | shuf)
+    do
+        if ! lsof -i:"$port" &> /dev/null
+        then
+            echo "$port"
+            return
+        fi
+    done
+    2>&1 echo "No available ports found."
+    return 1
+}
+
+# Runs in a subshell so that PGPASSWORD is only set in a temporary subshell.
+kubectl_psql() (
+    pod="$(
+        kubectl get pods \
+            | grep postgres \
+            | head -n 1 \
+            | awk '{ print $1 }'
+    )"
+    port="$(find_free_port)"
+
+    export PGPASSWORD="$(
+        kubectl \
+            exec \
+            $pod \
+            -- \
+            sh -c 'echo $POSTGRES_PASSWORD'
+    )"
+    username="$(
+        kubectl \
+            exec \
+            $pod \
+            -- \
+            sh -c 'echo $POSTGRES_USER'
+    )"
+    kubectl port-forward svc/db-postgresql $port:5432 > /dev/null &
+    trap "kill $!" EXIT
+    sleep 2
+    psql \
+        --port $port \
+        --username=$username \
+        --host=localhost \
+        $@
+)
+
+# Runs in a subshell so that PGPASSWORD is only set in a temporary subshell.
+kubectl_pg_dump() (
+    pod="$(
+        kubectl get pods \
+            | grep postgres \
+            | head -n 1 \
+            | awk '{ print $1 }'
+    )"
+    port="$(find_free_port)"
+
+    export PGPASSWORD="$(
+        kubectl \
+            exec \
+            $pod \
+            -- \
+            sh -c 'echo $POSTGRES_PASSWORD'
+    )"
+    username="$(
+        kubectl \
+            exec \
+            $pod \
+            -- \
+            sh -c 'echo $POSTGRES_USER'
+    )"
+    kubectl port-forward svc/db-postgresql $port:5432 > /dev/null &
+    trap "kill $!" EXIT
+    sleep 2
+    pg_dump \
+        --port $port \
+        --username=$username \
+        --host=localhost \
+        $@
+)
