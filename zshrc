@@ -325,3 +325,7 @@ alias gp!='git push --force-with-lease'
 alias gbl='git branch-log'
 
 setopt rmstarsilent
+if [ -f ~/shell-cfg.zsh ]
+then
+    source ~/shell-cfg.zsh
+fi
