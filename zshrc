@@ -1,7 +1,3 @@
-autoload -U edit-command-line
-zle -N edit-command-line
-bindkey '\C-e' edit-command-line
-
 setopt rmstarsilent
 
 # pyenv
