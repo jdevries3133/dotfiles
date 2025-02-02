@@ -56,10 +56,15 @@ alias gsur="git submodule update --remote --merge"
 alias k="kubectl"
 alias kd="kubectl describe"
 function kns() {
-    if [[ -z $1 ]]
+    if [ -z $1 ]
     then
         kubectl get ns
-    else 
+    else
+        if [ -z "$(k get namespaces | grep "$1")" ]
+        then
+            echo "namespace $1 does not exist"
+            return 1
+        fi
         kubectl config set-context \
             $(kubectl config current-context) \
             --namespace=$1
