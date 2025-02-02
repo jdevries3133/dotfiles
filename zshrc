@@ -1,5 +1,3 @@
-setopt rmstarsilent
-
 # pyenv
 if [[ -d $HOME/.pyenv ]] ; then
     # Add pyenv executable to PATH and enable shims
@@ -8,6 +6,14 @@ if [[ -d $HOME/.pyenv ]] ; then
     eval "$(pyenv init --path)"
     # Load pyenv into the shell
     eval "$(pyenv init -)"
+fi
+
+export EDITOR=$(which nvim)
+
+# bat
+which bat > /dev/null
+if [[ $? -eq 0 ]] then
+    alias cat="bat"
 fi
 
 export EDITOR=$(which nvim)
@@ -236,8 +242,46 @@ function gbrn() {
     echo $sanitized_message
 }
 
-# `goo` is the essential glue of my One-Branch git workflow. See
-# https://jackdevries.com/post/oneBranch to learn more.
+# The glue of the one-branch workflow. Treating a single branch as a personal
+# trunk is great, because it allows you to use interactive rebasing to manage
+# an evolving stack of personal changes. Better yet, when commits merge into
+# the main branch, they will "dissapear" from your personal trunk and provide
+# a little notification to you! For example:
+#
+#     dropping e2eb1d215a87d0c6cfb06580ccab80bbc2432ace feat: some change
+#     -- patch contents already upstream
+#
+# The tricky part of this workflow is picking individual commits off of your
+# trunk and creating downstream branches for pull requests. That process is
+# automated by `goo`.
+#
+# After running `goo`, you will be presented with the opportunity to make a
+# rebase plan on your personal trunk. Here, you should craft your _target
+# branch_ (the one you intend to open an MR for). Typically, this means
+# deleting every line except for the one commit you intend to keep.
+#
+# When you save an exist the rebase plan, and then complete the rebase, `goo`
+# will;
+#
+# - automatically generate a branch name based on the base-commit title
+# - reset the target branch to its merge-base with the main branch
+# - cherry-pick each commit on the branch you crafted to the target branch
+#
+# Ultimately, this gives you a branch that you can force-push up to your PR.
+# 
+# Since the branch name is based on the branch's base commit, the name will
+# be stable as long as you don't change the base commit's title. You can keep
+# adding more commits to your PR if you wish, just stack them on top of the
+# original base commit.
+#
+# If you wish to amend to your original commit instead of creating new commits
+# (this is what I do because it's easier to manage), this is well-supported
+# too. Notice that the generated branch retains the same merge-base with
+# master, even if you have rebased your personal trunk. This means that your
+# reviwer can easily see what changed in-between force-pushes, without all
+# the noise that is typically introduced from rebasing.
+#
+# See also https://jackdevries.com/post/oneBranch
 function goo() {
 
     # See https://chatgpt.com/share/b88cf4e0-519d-4d51-a47e-9013fc4ed23d
@@ -245,43 +289,30 @@ function goo() {
 
     main_branch=$(git_main_branch)
     starting_branch=$(git_current_branch)
-    auto_branch=$(date '+temp_goo__%m/%d/%Y__%s')
-    target_branch=$auto_branch
+    auto_branch=$(date '+jack__%m/%d/%Y__%s')
 
-    git checkout -b $auto_branch || git checkout $auto_branch
-    git reset --hard $starting_branch
-
-    # aka `grbpr`
+    git checkout -b $auto_branch
     git rebase -i $(git merge-base $(git_main_branch) HEAD)
 
     # If the previous rebase had some merge conflicts, we're done; need to
-    # defer to the human.
+    # defer to the human. Human can later re-run `goo` to proceed.
     if [ $? != 0 ]
     then
         return
     fi
 
-    # Rename the automatic branch to match the commit message, derived from
-    # the branch base commit.
+    # At this point, sitting on a crappy generated branch. Instead, let's create a
+    # semantic branch name from the commit message, destroying the temporary
+    # branch that we're on, so that we are left with a nicely named
+    # one.
+
+    # rename the branch to match the commit message
     semantic_branch_name=$(gbrn)
     git branch -m $semantic_branch_name
-
-    # The semantic branch may already exist, in which case the above branch
-    # rename will have failed. In that case, we want to put this branch's
-    # commits onto that branch, with the caveat that it's nice to maintain
-    # a consistent merge-base on branches who have pull requests. If we're
-    # going to force-push, maintaining a consistent merge-base with the
-    # main branch allows the reviewer to directly diff the previous and
-    # current HEAD of the PR branch. GitHub and GitLab also have features in
-    # their web UI which work better if we maintain a consistent merge-base.
-    #
-    # To maintain a consistent merge-base, we will;
-    #
-    # 1. Checkout to the PR branch.
-    # 2. Hard-reset it to its own merge-base with the main branch.
-    # 3. Cherry-pick each commit from the generated branch onto this branch.
     if [ $? != 0 ]
     then
+        # The semantic branch already exists. We need to update it instead of
+        # creating it.
         git checkout $semantic_branch_name
         git reset --hard $(git merge-base $main_branch HEAD)
         auto_branch_commits="$(
@@ -289,27 +320,19 @@ function goo() {
         )"
         for commit in $auto_branch_commits
         do
-            git cherry-pick $commit
-
-            # Again, if the cherry-pick introduces conflicts, we need to stop
-            # and defer to the human. This could be exacerbated if your PR
-            # branch is too far behind. If that is the case, you can always
-            # manually rebase the PR branch on the main branch, which will
-            # update its merge-base to be closer to the current HEAD of
-            # the main branch.
+            git cherry-pick $commit > /dev/null
             if [ $? != 0 ]
             then
                 return
             fi
         done
-
-        # Finally, delete the generated branch to cleanup after ourselves.
-        git branch -D $auto_branch
-
     fi
+
+    # # Finally, delete the generated branch to cleanup after ourselves
+    git branch -D $auto_branch
 }
 
-# Goo with a fixup before-hand
+# Goo with a fixup before-hand. Generally used for amending pull requests.
 function goof() {
     gfix
     goo $@
