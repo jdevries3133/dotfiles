@@ -317,7 +317,7 @@ function goof() {
 
 # I use this with my one-branch workflow to create visual delimiters. See
 # also https://jackdevries.com/post/oneBranch
-alias gdelim='git commit --allow-empty -m "-------------------------------"'
+alias gdelim='git commit --allow-empty -m "-------------------------------"; git commit --allow-empty -m "-------------------------------"'
 alias gbt='gb -D temp; gco -b temp'
 alias gp!='git push --force-with-lease'
 # Note: I'm overriding `git blame`, but I never use git-blame from the command
