@@ -18,10 +18,6 @@ export KUBE_CONFIG_PATH=$HOME/.kube/config
 # make fzf index hidden directories
 export FZF_DEFAULT_COMMAND='fd --type f -H'
 
-if [[ -f ~/.env ]] then
-    source ~/.env
-fi
-
 alias kibana="k port-forward -n kube-system service/kibana-logging 5601"
 
 
@@ -55,11 +51,6 @@ alias temp="cd $(mktemp -d)"
 alias ggg="nvim ~/.oh-my-zsh/plugins/git/README.md"
 alias gsur="git submodule update --remote --merge"
 
-# bat
-which bat > /dev/null
-if [[ $? -eq 0 ]] then
-    alias cat="bat"
-fi
 
 # kubectl
 alias k="kubectl"
