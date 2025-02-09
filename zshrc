@@ -8,7 +8,6 @@ if [[ -d $HOME/.pyenv ]] ; then
     eval "$(pyenv init -)"
 fi
 
-export EDITOR=$(which nvim)
 
 # bat
 which bat > /dev/null
@@ -16,7 +15,6 @@ if [[ $? -eq 0 ]] then
     alias cat="bat"
 fi
 
-export EDITOR=$(which nvim)
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/.local/bin
 export KUBE_CONFIG_PATH=$HOME/.kube/config
@@ -441,3 +439,5 @@ kubectl_pg_dump() (
         --host=localhost \
         $@
 )
+
+export EDITOR='nvim'
