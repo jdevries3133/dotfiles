@@ -32,6 +32,7 @@ ln -s $PWD/gitexcludes $HOME/.config/git/ignore
 
 # zsh
 ln -s $PWD/zshrc $HOME/.zshrc
+ln -s $PWD/zshenv $HOME/.zshenv
 
 which zsh > /dev/null
 if [[ $? != 0 ]] ; then
