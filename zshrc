@@ -1,15 +1,6 @@
 # # Amazon Q pre block. Keep at the top of this file.
 # [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
-# BEGIN oh-my-zsh [DUPLICATED; see ./shell_aliases.zsh]
-#
-# Note: for now, I run this twice, which slows down shell startup quite a bit.
-# I source it once from `~/.zshenv`, because I want the aliases in
-# non-interactive terminals. I source it again in `~/.zshrc` because I want
-# the oh-my-zsh prompt, which I think isn't setup when we source from
-# `~/.zshenv`, since `~/.zshenv` runs in a non-interactive context. I'm not
-# sure if there is a workaround where I can source only the alias part of
-# oh-my-zsh first, and then source the setup for interactive components later.
-#
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
@@ -17,7 +8,6 @@ HYPHEN_INSENSITIVE="true"
 DISABLE_UPDATE_PROMPT="true"
 plugins=(git kubectl vi-mode terraform)
 source $ZSH/oh-my-zsh.sh
-# END oh-my-zsh
 
 # pyenv
 if [ -d $HOME/.pyenv ]

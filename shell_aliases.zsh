@@ -1,5 +1,13 @@
 #!/bin/zsh
 
+
+autoload -Uz compinit
+compinit
+# Source any bits of oh-my-zsh with plugins I really care about an extra
+# time up-front. This file is sourced by ~/.zshenv, which means that the
+# aliases are even available in non-interactive shells.
+source ~/.oh-my-zsh/plugins/git/git.plugin.zsh
+
 # Shell aliases are factored into their own file so that it can be sourced in
 # the ~/.zshenv file. This will cause aliases to be available in interactive
 # and non-interactive shells. The latter is relevant when using `:!` from
@@ -365,3 +373,4 @@ function nvims() {
         echo "no session.vim file found"
     fi
 }
+
