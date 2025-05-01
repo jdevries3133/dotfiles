@@ -9,6 +9,7 @@
 
 # my darling boy
 alias n='nvim'
+export EDITOR=nvim
 
 # venv-related aliases
 VENV_NAME="venv"
