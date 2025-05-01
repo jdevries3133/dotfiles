@@ -1,3 +1,5 @@
+# # Amazon Q pre block. Keep at the top of this file.
+# [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 # BEGIN oh-my-zsh [DUPLICATED; see ./shell_aliases.zsh]
 #
 # Note: for now, I run this twice, which slows down shell startup quite a bit.
@@ -53,3 +55,5 @@ then
     source ~/shell-cfg.zsh
 fi
 
+# Amazon Q post block. Keep at the bottom of this file.
+# [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
