@@ -15,4 +15,6 @@
 	detachedHead = false
 	skippedCherryPicks = false
 [push]
- 	autoSetupRemote = true
+	autoSetupRemote = true
+[core]
+	editor = nvim --cmd 'let g:unception_block_while_host_edits=1'
