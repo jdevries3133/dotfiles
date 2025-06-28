@@ -261,6 +261,13 @@ alias gp!='git push --force-with-lease'
 # line.
 alias gbl='git branch-log'
 
+# Effectively allows you to checkout to the same branch in multiple worktress,
+# which the worktree feature infuriatingly disallows.
+gcosh() {
+    rev="$(git rev-parse $1)"
+    git checkout $rev
+}
+
 setopt rmstarsilent
 
 alias ycn='yap chat --new'
