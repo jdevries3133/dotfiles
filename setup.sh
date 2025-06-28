@@ -56,5 +56,7 @@ mkdir -p $HOME/.mutt
 ln -s $PWD/muttrc $HOME/.muttrc
 ln -s $PWD/mutt_view_attachment.sh $HOME/.mutt/view_attachment.sh
 ln -s $PWD/mailcap $HOME/.mailcap
+mkdir -p $HOME/.config/ghostty/config
+ln -s $PWD/ghosty-config $HOME/.config/ghostty/config
 echo "Thanks!
 Jack DeVries" >> $HOME/.mutt/signature_personal
