@@ -2,8 +2,10 @@
 
 set -euxo pipefail
 
-file="$(mktemp)"
-cat <<'EOF' > $file
+if [ -z "$(docker image ls | grep claude)" ]
+then
+    file="$(mktemp)"
+    cat <<'EOF' > $file
 FROM node:latest
 RUN npm install -g @anthropic-ai/claude-code
 RUN adduser jack && mkdir -p /home/jack && chown -R jack:jack /home/jack
@@ -11,7 +13,8 @@ USER jack
 WORKDIR /home/jack/workdir
 ENTRYPOINT claude
 EOF
-docker build -t claude -f $file .
+    docker build -t claude -f $file .
+fi
 docker volume create claude-home
 docker run \
     -it \
