@@ -7,6 +7,7 @@ then
     file="$(mktemp)"
     cat <<'EOF' > $file
 FROM node:latest
+RUN apt-get update -y && apt-get upgrade -y && apt-get install -y curl jq python3
 RUN npm install -g @anthropic-ai/claude-code
 RUN adduser jack && mkdir -p /home/jack && chown -R jack:jack /home/jack
 USER jack
