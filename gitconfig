@@ -18,3 +18,5 @@
 	autoSetupRemote = true
 [core]
 	editor = nvim --cmd 'let g:unception_block_while_host_edits=1'
+[commit]
+	verbose = true
