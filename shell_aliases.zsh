@@ -116,9 +116,6 @@ alias nrtc="npm run typecheck"
 
 alias listen="lsof -i -P -n | grep LISTEN"
 
-
-export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
-
 alias gbc="gb --sort=committerdate"
 alias grbpr='git rebase -i $(git merge-base $(git_main_branch) HEAD)'
 alias grrs='git reset --soft'
