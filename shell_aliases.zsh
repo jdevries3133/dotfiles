@@ -381,3 +381,21 @@ function nvims() {
     fi
 }
 
+redo() (
+    set -euxo pipefail
+
+    while true
+    do
+        set +e
+        $@
+        set -e
+        echo -n "again? (Y/n): "
+        read answer
+        if [ "$answer" = "n" ]
+        then
+            break
+        fi
+    done
+
+)
+
