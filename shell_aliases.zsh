@@ -399,3 +399,16 @@ redo() (
 
 )
 
+export PATH="$PATH:$HOME/.local/quickzilver"
+
+# Overwrite your zig install with the one from
+# ~/.config/quickzilver/conf.zon
+qz_sync() (
+  set -eo pipefail
+  cd ~/.local/quickzilver
+  ls | xargs rm -rf
+  cat ~/.config/quickzilver/conf.zon \
+    | quickzilver \
+    | unxz \
+    | tar -xf - --strip-components 1
+)
