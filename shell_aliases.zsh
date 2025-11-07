@@ -230,7 +230,7 @@ function goo() {
         git checkout $semantic_branch_name
         git reset --hard $(git merge-base $main_branch HEAD)
         auto_branch_commits="$(
-            git log --format="%H" $main_branch..$auto_branch | tac | xargs
+            git log --reverse --format="%H" $main_branch..$auto_branch | xargs
         )"
         for commit in $auto_branch_commits
         do
