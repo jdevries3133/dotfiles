@@ -84,7 +84,9 @@ alias grao="git remote add origin"
 alias grro="git remote rm origin"
 
 # tmux (warning: collisions with trunk)
-alias t="tmux"
+t() {
+    tmux new-session -t "$(basename $PWD)"
+}
 alias tl="tmux ls"
 alias ta="tmux attach-session -t"
 alias tn="tmux new-session -t"
@@ -409,3 +411,47 @@ qz_sync() (
     | unxz \
     | tar -xf - --strip-components 1
 )
+
+# run `zig test $1`. Exit early if it succeeds. If it fails, check if the first
+# word in the last line of output is an executable file. If so, run it with
+# lldb, and pass the `-o r` flag so that the binary runs immediately on launching
+# lldb (because I normally use `@breakpoint()` to set breakpoints up-front.
+zig_test_and_debug() {
+    file="$1"
+    output="$(zig test "$file" 2>&1)"
+    if [ $? -eq 0 ]
+    then
+        echo "$output"
+        return 0
+    fi
+    executable="$(echo "$output" | tail -n 1 | awk '{ print $1 }')"
+    if [ -f "$executable" ] && [ -x "$executable" ]
+    then
+        lldb -o r "$executable"
+    else
+        echo "$output"
+    fi
+}
+
+# local build takes precedence over quickzilver
+export PATH="$HOME/repos/zig/build/stage3/bin:$PATH"
+
+export PATH="$PATH:$HOME/repos/zls/zig-out/bin"
+update_zig() (
+    set -euxo pipefail
+    cd ~/repos/zig
+    mkdir -p build
+    git checkout main
+    git fetch
+    git merge upstream/main
+    cd build
+    cmake "-DCMAKE_PREFIX_PATH=/opt/homebrew/opt/llvm@19/" ..
+    make
+    cd ~/repos/zls
+    git pull
+    zig build -Doptimize=ReleaseFast
+)
+
+alias zbt='zig build test'
+alias zbr='zig build run'
+alias zb='zig build run'
