@@ -441,12 +441,12 @@ update_zig() (
     set -euxo pipefail
     cd ~/repos/zig
     mkdir -p build
-    git checkout main
+    git checkout master
     git fetch
-    git merge upstream/main
+    git merge upstream/master
     cd build
     cmake "-DCMAKE_PREFIX_PATH=/opt/homebrew/opt/llvm@19/" ..
-    make
+    make -j
     cd ~/repos/zls
     git pull
     zig build -Doptimize=ReleaseFast
