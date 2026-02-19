@@ -3,7 +3,13 @@
   "permission": {
     "*": "ask",
     "Read *": "allow",
-    "Write *": "allow",
-    "bash": "ask"
+    "Edit *": "allow",
+    "Glob *": "allow",
+    "todowrite": "allow",
+    "todoread": "allow",
+    "bash": {
+      "*": "ask",
+      "head *": "allow"
+    }
   }
 }
