@@ -7,14 +7,22 @@
   },
   "permission": {
     "*": "ask",
-    "Read *": "allow",
-    "Edit *": "allow",
-    "Glob *": "allow",
+    "read *": "allow",
+    "edit *": "allow",
+    "glob *": "allow",
     "todowrite": "allow",
     "todoread": "allow",
+    "task": "allow",
+    "external_directories": {
+      "/Users/johndevries/repos/zig/*": "allow"
+    },
     "bash": {
       "*": "ask",
-      "head *": "allow"
+      "head *": "allow",
+      "grep *": "allow",
+      "rg *": "allow",
+      "head *": "allow",
+      "grep": "allow"
     }
   }
 }
