@@ -436,7 +436,7 @@ zig_test_and_debug() {
 }
 
 # local build takes precedence over quickzilver
-export PATH="$HOME/repos/zig/build/stage3/bin:$PATH"
+export PATH="$HOME/repos/zig/stage3/bin"
 
 export PATH="$PATH:$HOME/repos/zls/zig-out/bin"
 update_zig() (
