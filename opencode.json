@@ -1,5 +1,10 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "mode": {
+    "teach": {
+      "prompt": "{file:~/repos/dotfiles/opencode_teacher_mode.txt}"
+    }
+  },
   "permission": {
     "*": "ask",
     "Read *": "allow",
