@@ -459,3 +459,5 @@ alias zbtw='zig build test --watch'
 alias zbr='zig build run'
 alias zbrw='zig build run --watch'
 alias zb='zig build'
+
+export ZIG_LIB_DIR="$HOME/repos/zig/lib"
