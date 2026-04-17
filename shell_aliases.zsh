@@ -442,13 +442,16 @@ export PATH="$PATH:$HOME/repos/zls/zig-out/bin"
 update_zig() (
     set -euxo pipefail
     cd ~/repos/zig
-    mkdir -p build
     git checkout master
     git fetch
     git merge upstream/master
-    cd build
-    cmake "-DCMAKE_PREFIX_PATH=/opt/homebrew/opt/llvm@19/" ..
-    make -j
+    zig build \
+        -p stage3 \
+        --search-prefix "/opt/homebrew/opt/llvm@21/" \
+        --zig-lib-dir "lib" \
+        -Dstatic-llvm \
+        -Doptimize=ReleaseFast \
+        --maxrss 100000000000
     cd ~/repos/zls
     git pull
     zig build -Doptimize=ReleaseFast
