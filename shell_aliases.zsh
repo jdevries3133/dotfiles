@@ -19,6 +19,8 @@ source ~/.oh-my-zsh/plugins/git/git.plugin.zsh
 alias n='nvim'
 export EDITOR=nvim
 
+alias oc='opencode'
+
 # venv-related aliases
 VENV_NAME="venv"
 alias vnv="python3.10 -m venv $VENV_NAME \
