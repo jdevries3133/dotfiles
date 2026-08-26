@@ -16,14 +16,27 @@
     "task": "allow",
     "external_directories": {
       "/Users/johndevries/repos/zig/*": "allow"
-    },
     "bash": {
       "*": "ask",
-      "head *": "allow",
+      "bd *": "allow",
+      "cat *": "allow",
+      "echo *": "allow",
+      "find *": "allow",
+      "git log *": "allow",
+      "git ls-files *": "allow",
+      "git show *": "allow",
+      "git status *": "allow",
       "grep *": "allow",
-      "rg *": "allow",
       "head *": "allow",
-      "grep": "allow"
+      "sed *": "allow",
+      "head *": "allow",
+      "head *": "allow",
+      "ls *": "allow",
+      "ls *": "allow",
+      "make *": "allow",
+      "kubectl get *": "allow",
+      "kubectl describe *": "allow",
+      "rg *": "allow"
     }
   }
 }
