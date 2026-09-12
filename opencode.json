@@ -1,15 +1,36 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
-    "experimental.continue_loop_on_deny": true
+    "experimental.continue_loop_on_deny": false
+  },
+  "agent": {
+    "build": {
+      "model": "anthropic/claude-opus-5"
+    },
+    "plan": {
+      "model": "anthropic/claude-opus-5"
+    },
+    "general": {
+      "model": "anthropic/claude-sonnet-5"
+    },
+    "explore": {
+      "model": "anthropic/claude-haiku-4-5"
+    },
+    "scout": {
+      "model": "anthropic/claude-haiku-4-5"
+    },
+    "compaction": {
+      "model": "anthropic/claude-opus-5"
+    }
   },
   "permission": {
-    "*": "deny",
+    "*": "ask",
     "edit *": "ask",
     "read *": "allow",
     "glob *": "allow",
     "grep *": "allow",
     "todowrite": "allow",
+    "sort *": "allow",
     "todoread": "allow",
     "task": "allow",
     "webfetch": "deny",

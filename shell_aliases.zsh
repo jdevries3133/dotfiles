@@ -400,45 +400,11 @@ redo() (
 
 )
 
-export PATH="$PATH:$HOME/.local/quickzilver"
 
-# Overwrite your zig install with the one from
-# ~/.config/quickzilver/conf.zon
-qz_sync() (
-  set -eo pipefail
-  cd ~/.local/quickzilver
-  ls | xargs rm -rf
-  cat ~/.config/quickzilver/conf.zon \
-    | quickzilver \
-    | unxz \
-    | tar -xf - --strip-components 1
-)
-
-# run `zig test $1`. Exit early if it succeeds. If it fails, check if the first
-# word in the last line of output is an executable file. If so, run it with
-# lldb, and pass the `-o r` flag so that the binary runs immediately on launching
-# lldb (because I normally use `@breakpoint()` to set breakpoints up-front.
-zig_test_and_debug() {
-    file="$1"
-    output="$(zig test "$file" 2>&1)"
-    if [ $? -eq 0 ]
-    then
-        echo "$output"
-        return 0
-    fi
-    executable="$(echo "$output" | tail -n 1 | awk '{ print $1 }')"
-    if [ -f "$executable" ] && [ -x "$executable" ]
-    then
-        lldb -o r "$executable"
-    else
-        echo "$output"
-    fi
-}
-
-# local build takes precedence over quickzilver
-export PATH="$PATH:$HOME/repos/zig/stage3/bin"
-
+# export PATH="$PATH:$HOME/repos/zig/stage3/bin"
+export ZIG_LIB_DIR="$HOME/repos/zig/lib"
 export PATH="$PATH:$HOME/repos/zls/zig-out/bin"
+
 update_zig() (
     set -euxo pipefail
     cd ~/repos/zig
@@ -463,4 +429,3 @@ alias zbr='zig build run'
 alias zbrw='zig build run --watch'
 alias zb='zig build'
 
-export ZIG_LIB_DIR="$HOME/repos/zig/lib"
