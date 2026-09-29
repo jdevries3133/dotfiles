@@ -1,30 +1,18 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
-    "experimental.continue_loop_on_deny": false
+    "experimental.continue_loop_on_deny": true
   },
   "agent": {
     "build": {
-      "model": "anthropic/claude-opus-5"
+      "model": "amazon-bedrock/qwen.qwen3-coder-next"
     },
     "plan": {
-      "model": "anthropic/claude-opus-5"
-    },
-    "general": {
-      "model": "anthropic/claude-sonnet-5"
-    },
-    "explore": {
-      "model": "anthropic/claude-haiku-4-5"
-    },
-    "scout": {
-      "model": "anthropic/claude-haiku-4-5"
-    },
-    "compaction": {
-      "model": "anthropic/claude-opus-5"
+      "model": "amazon-bedrock/qwen.qwen3-coder-next"
     }
   },
   "permission": {
-    "*": "ask",
+    "*": "deny",
     "edit *": "ask",
     "read *": "allow",
     "glob *": "allow",
@@ -36,7 +24,7 @@
     "webfetch": "deny",
     "websearch": "deny",
     "bash": {
-      "*": "ask",
+      "*": "deny",
       "bd *": "allow",
       "cat *": "allow",
       "echo *": "allow",
@@ -49,13 +37,12 @@
       "head *": "allow",
       "sed *": "allow",
       "head *": "allow",
-      "head *": "allow",
-      "ls *": "allow",
       "ls *": "allow",
       "make *": "allow",
       "kubectl get *": "allow",
       "kubectl describe *": "allow",
-      "rg *": "allow"
+      "rg *": "allow",
+      "fd *": "allow"
     }
   }
 }
