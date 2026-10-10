@@ -12,8 +12,6 @@ then
     alias cat="bat"
 fi
 
-export PATH=$PATH:$HOME/bin
-export PATH=$PATH:$HOME/.local/bin
 export KUBE_CONFIG_PATH=$HOME/.kube/config
 
 export XDG_CONFIG_HOME=$HOME/.config
@@ -29,3 +27,6 @@ if [ -f ~/shell-cfg.zsh ]
 then
     source ~/shell-cfg.zsh
 fi
+
+export PATH="$HOME/bin:$PATH"
+export PATH="$PATH:$HOME/.local/bin"
