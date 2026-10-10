@@ -5,17 +5,6 @@ DISABLE_UPDATE_PROMPT="true"
 plugins=(git kubectl vi-mode terraform)
 source $ZSH/oh-my-zsh.sh
 
-# pyenv
-if [ -d $HOME/.pyenv ]
-then
-    # Add pyenv executable to PATH and enable shims
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/versions/3.9.6/bin:$PATH"
-    eval "$(pyenv init --path)"
-    # Load pyenv into the shell
-    eval "$(pyenv init -)"
-fi
-
 # bat
 which bat > /dev/null
 if [ $? = 0 ]
