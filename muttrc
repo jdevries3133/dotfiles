@@ -22,6 +22,7 @@ set sort = "reverse-threads"
 set sort_aux = "date-received"
 set autoedit = yes
 set edit_headers = yes
+set send_charset="us-ascii:utf-8"
 
 
 
