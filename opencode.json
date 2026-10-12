@@ -1,4 +1,13 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "enabled_providers": ["opencode"]
+  "enabled_providers": ["opencode"],
+  "permissions": [{ "action": "question", "resource": "*", "effect": "deny" }],
+  "agents": {
+    "build": {
+      "permissions": [{ "action": "question", "resource": "*", "effect": "deny" }]
+    },
+    "plan": {
+      "permissions": [{ "action": "question", "resource": "*", "effect": "deny" }]
+    }
+  }
 }

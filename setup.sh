@@ -49,6 +49,12 @@ install_warning tmux
 ln -s $PWD/tmux.conf $HOME/.tmux.conf
 
 
+# opencode
+mkdir -p $HOME/.config/opencode
+ln -s $PWD/opencode.json $HOME/.config/opencode/opencode.json
+ln -s $PWD/cli.json $HOME/.config/opencode/cli.json
+
+
 # mutt
 install_warning mutt
 
