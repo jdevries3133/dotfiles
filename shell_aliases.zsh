@@ -85,10 +85,11 @@ alias gwr="git worktree remove"
 alias grao="git remote add origin"
 alias grro="git remote rm origin"
 
-# tmux (warning: collisions with trunk)
-t() {
+startup_tmux_cwd() {
     tmux new-session -t "$(basename $PWD)"
 }
+# tmux (warning: collisions with trunk)
+alias t='startup_tmux_cwd'
 alias tl="tmux ls"
 alias ta="tmux attach-session -t"
 alias tn="tmux new-session -t"
@@ -429,3 +430,17 @@ alias zbr='zig build run'
 alias zbrw='zig build run --watch'
 alias zb='zig build'
 
+toterm() {
+    cat <<EOF | pbcopy
+(
+cd "$PWD"
+startup_tmux_cwd
+)
+EOF
+    open -a /Applications/Ghostty.app
+}
+
+gwdone() {
+    git worktree remove .
+    exit
+}
